@@ -1,10 +1,18 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { useMode } from '../../hooks/useMode'
 import './Name.css'
 
 const Name = () => {
   const inputRef = useRef(null)
   const formRef = useRef(null)
   const [name, setName] = useState('Max')
+
+  const { countArray } = useMode()
+
+  useEffect(() => {
+    // console.log(`name is ${name}`)
+  }, [name])
+  
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -19,6 +27,9 @@ const Name = () => {
         <input type="text" name="name" id="name" ref={inputRef}/>
         <button>Submit</button>
       </form>
+      {countArray.map(num => (
+        <p key={num}>{num}</p>
+      ))}
     </div>
   )
 }
